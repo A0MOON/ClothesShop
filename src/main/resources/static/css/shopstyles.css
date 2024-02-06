@@ -1,0 +1,79 @@
+
+/*header*/
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.header {
+    background-color: #f1f1f1;
+    padding: 0px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 40px; /* Adjust the height as needed */
+    width: 100%;  /* Use 100% to make it full-width, adjust as needed */
+}
+
+.navigation {
+    display: flex;
+    margin-left: auto;
+}
+
+.navigation a {
+    text-decoration: none;
+    margin-left: 35px;
+    font-size: 15px; /* Set font size for navigation links */
+}
+
+.header .ahyrob-link {
+    margin-right: 30px;  /* Move it to the right */
+    font-size: 1.5em;    /* Set font size for "ahyrob" */
+    font-weight: bold;   /* Set font weight to bold if desired */
+    color: black;         /* Change text color if needed */
+    text-decoration: none;
+}
+/*
+body
+*/
+
+
+
+.product-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.left-section {
+    background-color: white;
+}
+
+.product-box {
+    display: flex;
+    margin-top: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.product-box img {
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    width: 66.66%; /* 2/3 of the container */
+}
+
+.product-info {
+    padding: 10px;
+    width: 33.33%; /* 1/3 of the container */
+}
+
+.product-info h3 {
+    margin-bottom: 10px;
+}
+
+/* 이미지 크기 조절 */
+.product-box img {
+    width: 450px; /* 원하는 너비로 설정 */
+    height: 450px; /* 높이를 자동으로 조절하여 가로 세로 비율 유지 */
+}

@@ -1,0 +1,22 @@
+spring:
+  datasource:
+    url: jdbc:h2:tcp://localhost/~/clothesshop
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+
+  jpa:
+    hibernate:
+      ddl-auto: create #application loading시점에 테이블 drop시키는 역할, 운영 환경에서는 X, Local 개발 환경에서만
+    properties:
+      hibernate:
+      # show_sql: true #Jpa 실행 쿼리를 콘솔에 찍는 역할
+      format_sql: true # query 한줄로 말고 보기 좋게 출력
+
+logging:
+  level:
+    org.hibernate.SQL: debug #콘솔에 말고 log 파일로 생성
+# org.hibernate.type: trace

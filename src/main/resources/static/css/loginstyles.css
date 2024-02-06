@@ -1,0 +1,114 @@
+/*header*/
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.header {
+    background-color: #f1f1f1;
+    padding: 0px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 40px; /* Adjust the height as needed */
+    width: 100%;  /* Use 100% to make it full-width, adjust as needed */
+}
+
+.navigation {
+    display: flex;
+    margin-left: auto;
+}
+
+.navigation a {
+    text-decoration: none;
+    margin-left: 35px;
+    font-size: 15px; /* Set font size for navigation links */
+}
+
+.header .ahyrob-link {
+    margin-right: 30px;  /* Move it to the right */
+    font-size: 1.5em;    /* Set font size for "ahyrob" */
+    font-weight: bold;   /* Set font weight to bold if desired */
+    color: black;         /* Change text color if needed */
+    text-decoration: none;
+}
+
+
+
+/*body*/
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: white;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+.login-form {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    margin: auto;
+}
+
+.form-input-group {
+    margin-bottom: 20px;
+}
+
+.form-input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    box-sizing: border-box;
+    border-radius: 15px;
+    border: 1px solid #ccc;
+}
+
+.form-button {
+    width: 160px; /*버튼 길이*/
+    padding: 10px;
+    background-color: #f1f1f1;
+    color: black;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    font-weight: bold;
+    margin: 10px 70px;  /*버튼 위치*/
+}
+
+.form-button2 {
+
+    width: 160px;
+    padding: 10px;
+    background-color: white;
+    color: black;
+    border: 2px solid #f1f1f1;
+    border-radius: 15px;
+    cursor: pointer;
+    font-weight: bold;
+    margin: 10px 70px;
+
+
+}
+
+.form-link {
+    text-decoration: none;
+    color: black;
+    margin-top: 10px;
+    display: inline-block;
+    font-weight: bold;
+    font-size: small;
+}
+
+/* Add more styles as needed */

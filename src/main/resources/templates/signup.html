@@ -1,0 +1,56 @@
+<!--
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Login Page</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link th:href="@{/css/loginstyles.css}"
+          href="/css/loginstyles.css" rel="stylesheet">
+
+
+</head>
+<body>
+<div class="container">
+    <div th:replace="fragments/bodyHeader :: bodyHeader"/>
+    <div class="login-form">
+        <h2>정보 입력</h2>
+        <form th:action="@{/member/new}" method="post" th:object="${signUpForm}">
+            <div class="form-input-group">
+                <h3>아이디</h3>
+                <input type="text" th:field="*{loginId}" class="form-input" placeholder="아이디를 입력하세요" required>
+            </div>
+            <div class="form-input-group">
+                <h3>이메일</h3>
+                <input type="email" th:field="*{email}" class="form-input" placeholder="이메일을 입력하세요" required>
+            </div>
+            <div class="form-input-group">
+                <h3>이름</h3>
+                <input type="text" th:field="*{name}" class="form-input" placeholder="이름을 입력하세요" required>
+            </div>
+            <div class="form-input-group">
+                <h3>비밀번호</h3>
+                <input type="password" th:field="*{password}" class="form-input" placeholder="비밀번호를 입력하세요" required>
+            </div>
+            <div class="form-input-group">
+                <h3>비밀번호 확인</h3>
+                <input type="password" th:field="*{password2}" class="form-input" placeholder="비밀번호를 입력하세요" required>
+            </div>
+            <div class="form-input-group">
+                <h3>휴대폰 번호</h3>
+                <input type="text" th:field="*{phone}" class="form-input" placeholder="휴대폰 번호를 입력하세요" required>
+            </div>
+            <button type="submit" class="form-button">가입하기</button>
+            &lt;!&ndash;<button class = "btn btn-primary float-end"
+                onclick="location.href='addForm.html'"
+             th:onclick="|location.href=
+            '@{/basic/items/add}'|"
+            type = "button"> 상품등록 </button> &ndash;&gt;
+        </form>
+
+
+    </div>
+
+    <div th:replace="fragments/footer :: footer"/>
+</div>
+</body>
+</html>-->
