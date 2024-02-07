@@ -69,9 +69,25 @@ public class MemberServiceTest {
           String a = memberService.findLoginIdByNameAndEmail("a", "a@a");
           //then
           assertEquals(a,save.getLoginId());
-
-
        }
+
+       @Test
+       public void 비밀번호찾기(){
+           //given
+           Member member = new Member();
+           member.setLoginId("id");
+           member.setPassword("1234");
+           member.setName("a");
+           member.setEmail("a@a");
+           Member save = memberRepository.save(member);
+
+           //when
+            memberService.changePassword("id","a","a@a","4321");
+           //then
+           assertEquals(save.getPassword(),"4321");
+
+        }
+
 
 
 

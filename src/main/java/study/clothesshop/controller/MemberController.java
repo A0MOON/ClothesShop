@@ -10,10 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import study.clothesshop.domain.Member;
 import study.clothesshop.service.MemberService;
-import study.clothesshop.web.IdFinderForm;
-import study.clothesshop.web.LoginForm;
-import study.clothesshop.web.MemberForm;
-import study.clothesshop.web.SignUpForm;
+import study.clothesshop.web.*;
 
 import java.util.Optional;
 
@@ -90,6 +87,42 @@ public class MemberController {
             return "id-finder"; // 아이디 찾기 폼 페이지로 리다이렉트
         }
     }
+
+    // 비밀번호 찾기
+    @GetMapping(value = "/login/password-finder")
+    public String passwordFinderForm(Model model) {
+        model.addAttribute("passwordFinderForm", new passwordFinderForm());
+        return "password-finder";
+    }
+
+    @PostMapping("/login/password-finder")
+    public String passwordFinder(@ModelAttribute("passowrdFinderForm") passwordFinderForm passwordFinderForm, Model model) {
+        String loginId = passwordFinderForm.getLoginId();
+        String name = passwordFinderForm.getName();
+        String email = passwordFinderForm.getEmail();
+        String newPassword = passwordFinderForm.getPassword();
+
+        try {
+            // 비밀번호 변경
+            memberService.changePassword(loginId, name, email, newPassword);
+            // 비밀번호 변경 후 로그인 아이디를 모델에 추가하여 비밀번호 변경 성공 페이지로 이동
+            model.addAttribute("loginId", loginId);
+            return "password-found"; // 새로운 비밀번호 변경하는 페이지
+        } catch (IllegalArgumentException e) {
+            // 회원이 존재하지 않는 경우
+            model.addAttribute("error", true);
+            return "password-finder"; // 비밀번호 찾기 폼 페이지로 리다이렉트
+        }
+    }
+
+ /*   @GetMapping(value = "/login/password-found")
+    public String passwordFoundForm(Model model) {
+        model.addAttribute("passwordFoundForm", new passwordFoundForm());
+        return "login";
+    }*/
+
+
+
 
 
 

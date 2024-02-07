@@ -2,6 +2,7 @@ package study.clothesshop.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import study.clothesshop.domain.Member;
@@ -16,6 +17,7 @@ import java.util.Optional;
 public class MemberService {
 
     private final MemberRepository memberRepository;
+
 
     // 회원 가입
     public Long join(Member member) {
@@ -63,8 +65,16 @@ public class MemberService {
 
     }
 
-    @Transactional(readOnly = true)
-    public Optional<Member> findMemberByLoginId(String loginId) {
-        return memberRepository.findMemberByLoginId(loginId);
+
+    // 비밀번호 변경
+    @Transactional
+    public void changePassword(String loginId, String name, String email, String newPassword) {
+        Member member = memberRepository.findPasswordByLoginIdAndNameAndEmail(loginId, name, email);
+        if (member == null) {
+            throw new IllegalArgumentException("해당하는 회원이 없습니다.");
+        }
+        member.changePassword(newPassword);
     }
+
+
 }
