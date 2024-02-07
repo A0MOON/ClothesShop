@@ -11,12 +11,13 @@ import java.util.List;
 
 @Entity
 @Getter
+@Table(name = "orders")
 public class Order {
 
     // 1.
     @Id
     @GeneratedValue
-    @Column(name = "order_id")
+    @Column(name = "orders_id")
     private Long id;
 
     @Enumerated(EnumType.STRING)

@@ -111,4 +111,9 @@ body {
     font-size: small;
 }
 
-/* Add more styles as needed */
+.error-message {
+    color: red;
+    font-family: Arial, sans-serif; /* 원하는 글씨체로 변경 */
+    font-size: 12px; /* 원하는 글자 크기로 변경 */
+
+}

@@ -15,7 +15,6 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class MemberService {
 
-    @Autowired
     private final MemberRepository memberRepository;
 
     // 회원 가입
@@ -41,11 +40,25 @@ public class MemberService {
     }
 
 
-
     // 아이디 조회
     @Transactional(readOnly = true)
     public Optional<Member> findIdByNameAndEmail(String name, String email) {
         return memberRepository.findByNameAndEmail(name, email);
     }
 
+    public boolean login(String loginId, String password) {
+
+        Member member = memberRepository.findByLoginId(loginId);
+
+        if (member != null && member.getPassword().equals(password)) {
+            return true;
+        }
+        return false;
+
+    }
+
+    @Transactional(readOnly = true)
+    public Optional<Member> findMemberByLoginId(String loginId) {
+        return memberRepository.findMemberByLoginId(loginId);
+    }
 }

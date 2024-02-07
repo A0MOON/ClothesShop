@@ -38,5 +38,22 @@ public class MemberServiceTest {
         assertEquals(findmember1.getName(), newMember.getName());
      }
 
+     @Test
+     public void 로그인(){
+         //given
+         Member member = new Member();
+         member.setLoginId("id");
+         member.setPassword("1234");
+         Member newMember = memberRepository.save(member);
+
+         //when
+         boolean login = memberService.login("id", "1234");
+
+         //then
+         assertEquals(login,true);
+
+      }
+
+
 
 }
