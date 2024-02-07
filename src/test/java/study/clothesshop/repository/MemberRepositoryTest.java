@@ -29,7 +29,7 @@ public class MemberRepositoryTest {
         member1.setName("멤버");
         memberRepository.save(member1);
         //when
-        Optional<Member> findMember = memberRepository.findByNameAndEmail("멤버", "member1@example.com");
+        Optional<Member> findMember = memberRepository.findLoginIdByNameAndEmail("멤버", "member1@example.com");
         //then
         assertTrue(findMember.isPresent());
         Member findLoginId = findMember.get();

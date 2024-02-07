@@ -9,6 +9,7 @@ import study.clothesshop.domain.Member;
 import study.clothesshop.repository.MemberRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -44,7 +45,7 @@ public class MemberServiceTest {
          Member member = new Member();
          member.setLoginId("id");
          member.setPassword("1234");
-         Member newMember = memberRepository.save(member);
+         memberRepository.save(member);
 
          //when
          boolean login = memberService.login("id", "1234");
@@ -53,6 +54,25 @@ public class MemberServiceTest {
          assertEquals(login,true);
 
       }
+
+      @Test
+      public void 아이디찾기(){
+          //given
+          Member member = new Member();
+          member.setLoginId("id");
+          member.setPassword("1234");
+          member.setName("a");
+          member.setEmail("a@a");
+          Member save = memberRepository.save(member);
+
+          //when
+          String a = memberService.findLoginIdByNameAndEmail("a", "a@a");
+          //then
+          assertEquals(a,save.getLoginId());
+
+
+       }
+
 
 
 

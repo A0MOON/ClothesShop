@@ -27,20 +27,7 @@
             </div>
             <button type="submit" class="form-button">로그인</button>
         </form>
-        <script th:inline="javascript">
-            /*<![CDATA[*/
-            function validateLoginForm() {
-                var loginId = /*[[${loginForm.loginId}]]*/ '';
-                var password = /*[[${loginForm.password}]]*/ '';
 
-                if (!loginId || !password) {
-                    alert("아이디 또는 비밀번호를 입력하세요.");
-                    return false;
-                }
-                return true;
-            }
-            /*]]>*/
-        </script>
 
 
 

@@ -42,10 +42,16 @@ public class MemberService {
 
     // 아이디 조회
     @Transactional(readOnly = true)
-    public Optional<Member> findIdByNameAndEmail(String name, String email) {
-        return memberRepository.findByNameAndEmail(name, email);
+    public String findLoginIdByNameAndEmail(String name, String email) {
+        Optional<Member> loginIdByNameAndEmail = memberRepository.findLoginIdByNameAndEmail(name, email);
+        if (loginIdByNameAndEmail.isPresent()) {
+            Member member = loginIdByNameAndEmail.get();
+            return member.getLoginId();
+        }
+        return null; // 회원이 존재하지 않는 경우 null 반환
     }
 
+    // 로그인
     public boolean login(String loginId, String password) {
 
         Member member = memberRepository.findByLoginId(loginId);
