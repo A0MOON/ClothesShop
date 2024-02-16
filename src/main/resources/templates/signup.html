@@ -14,7 +14,6 @@
     <div class="signup-form">
         <h2>정보 입력</h2>
         <form th:action="@{/login/signup}" method="post" th:object="${SignUpForm}">
-            <!-- 실패 메시지를 표시할 영역 -->
             <div th:if="${error}" class="error-message">
                 이미 존재하는 회원입니다.
             </div>
@@ -43,11 +42,6 @@
                 <input type="text" name="phone" class="form-input" placeholder="휴대폰 번호를 입력하세요" required>
             </div>
             <button type="submit" class="form-button">가입하기</button>
-            <!--<button class = "btn btn-primary float-end"
-                onclick="location.href='addForm.html'"
-             th:onclick="|location.href=
-            '@{/basic/items/add}'|"
-            type = "button"> 상품등록 </button> -->
         </form>
 
 

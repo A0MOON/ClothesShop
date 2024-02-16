@@ -2,13 +2,14 @@ package study.clothesshop.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import study.clothesshop.domain.Member;
-import study.clothesshop.domain.UserStatus;
 
-import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.Optional;
 
 public interface MemberRepository extends JpaRepository<Member, Long> {
+
+
+    Optional<Member> findById(Long Long);
 
     Optional<Member> findLoginIdByNameAndEmail(String name, String email);
 
@@ -22,11 +23,7 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
 
     Optional<Member> findMemberByLoginId(String loginId);
 
-    Member findPasswordByLoginIdAndNameAndEmail(String LoginId, String Name, String email);
-
-
-
-
+    Optional<Member> findByLoginIdAndNameAndEmail(String loginId, String name, String email);
 
 
 }

@@ -1,5 +1,4 @@
 package study.clothesshop.domain;
-import study.clothesshop.domain.item.Item;
 import jakarta.persistence.*;
 import lombok.Getter;
 

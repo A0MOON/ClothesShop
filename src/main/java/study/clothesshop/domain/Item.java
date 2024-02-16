@@ -1,4 +1,4 @@
-package study.clothesshop.domain.item;
+package study.clothesshop.domain;
 
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -22,6 +22,7 @@ public class Item {
     private int price;
     private int stockQuantity;
     private int discountAmount;
+    private String description;
 
     // 2.
     @ManyToOne(fetch = FetchType.LAZY)

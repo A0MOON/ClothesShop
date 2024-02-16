@@ -1,18 +1,17 @@
 package study.clothesshop.controller;
 
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
+
 import study.clothesshop.domain.Member;
 import study.clothesshop.service.MemberService;
 import study.clothesshop.web.*;
 
-import java.util.Optional;
 
 @Controller
 @RequiredArgsConstructor
@@ -56,9 +55,9 @@ public class MemberController {
         boolean login = memberService.login(loginId, password);
 
         if (!login) {
-            // 로그인 실패 처리
+
             model.addAttribute("error", true);
-            return "login"; // 로그인 폼 페이지로 리다이렉트
+            return "login";
         } else {
             // 로그인 성공 처리
             return "redirect:/";
@@ -78,17 +77,18 @@ public class MemberController {
         String email = idFinderForm.getEmail();
         String findLoginId = memberService.findLoginIdByNameAndEmail(name, email);
 
-        if (findLoginId != null) { // 회원이 존재하는 경우
+        if (findLoginId != null) {
             model.addAttribute("loginId", findLoginId);
-            return "id-found"; // 아이디를 찾은 페이지로 이동
+            return "id-found";
         } else {
-            // 회원이 존재하지 않는 경우
+
             model.addAttribute("error", true);
-            return "id-finder"; // 아이디 찾기 폼 페이지로 리다이렉트
+            return "id-finder";
         }
     }
 
-    // 비밀번호 찾기
+    // 비밀번호 변경을 위한 회원 찾기
+
     @GetMapping(value = "/login/password-finder")
     public String passwordFinderForm(Model model) {
         model.addAttribute("passwordFinderForm", new passwordFinderForm());
@@ -96,34 +96,58 @@ public class MemberController {
     }
 
     @PostMapping("/login/password-finder")
-    public String passwordFinder(@ModelAttribute("passowrdFinderForm") passwordFinderForm passwordFinderForm, Model model) {
+    public String passwordFinder(@ModelAttribute("passwordFinderForm") passwordFinderForm passwordFinderForm, Model model, HttpSession session) {
         String loginId = passwordFinderForm.getLoginId();
         String name = passwordFinderForm.getName();
         String email = passwordFinderForm.getEmail();
-        String newPassword = passwordFinderForm.getPassword();
 
         try {
-            // 비밀번호 변경
-            memberService.changePassword(loginId, name, email, newPassword);
-            // 비밀번호 변경 후 로그인 아이디를 모델에 추가하여 비밀번호 변경 성공 페이지로 이동
+            Member member = memberService.findPasswordByLoginIdAndNameAndEmail(loginId, name, email);
+            if (member == null) {
+                throw new IllegalArgumentException("해당하는 회원이 없습니다.");
+            }
+
+            session.setAttribute("loggedInMember", member);
+
             model.addAttribute("loginId", loginId);
-            return "password-found"; // 새로운 비밀번호 변경하는 페이지
+            return "password-found";
         } catch (IllegalArgumentException e) {
-            // 회원이 존재하지 않는 경우
+
             model.addAttribute("error", true);
-            return "password-finder"; // 비밀번호 찾기 폼 페이지로 리다이렉트
+            return "password-finder";
         }
     }
 
- /*   @GetMapping(value = "/login/password-found")
-    public String passwordFoundForm(Model model) {
+    // 비밀번호 변경
+
+    @GetMapping(value = "/login/password-found")
+    public String passwordFoundForm1(Model model) {
         model.addAttribute("passwordFoundForm", new passwordFoundForm());
-        return "login";
-    }*/
+        return "password-found";
+    }
 
+    @PostMapping("/login/password-found")
+    public String changePassword(HttpSession session,
+                                 @RequestParam("newPassword") String newPassword,
+                                 @RequestParam("confirmPassword") String confirmPassword,
+                                 Model model) {
+        if (!newPassword.equals(confirmPassword)) {
+            model.addAttribute("error", true);
+            return "password-found";
+        }
 
+        Member member = (Member) session.getAttribute("loggedInMember");
 
+        if (member == null) {
+            return "redirect:/login";
+        }
 
+        member.setPassword(newPassword);
+        memberService.save(member);
+        return "home";
+    }
 
 
 }
+
+

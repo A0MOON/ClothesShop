@@ -3,6 +3,15 @@
 <head>
     <!--<link rel="stylesheet" href="/css/styles.css">-->
     <link rel="stylesheet" th:href="@{/css/styles.css}" />
+    <script>
+        function showTopPreview() {
+            var topPreview = document.getElementById("top-preview");
+            topPreview.innerHTML = "<h3>Top 페이지 미리보기</h3><p>이곳에 top 페이지 내용이 표시됩니다.</p>";
+            topPreview.style.top = (document.querySelector('.header').offsetHeight + 10) + "px";
+            topPreview.style.left = document.querySelector('.navigation').offsetLeft + "px";
+            topPreview.style.display = "block";
+        }
+    </script>
 
 </head>
 <body>

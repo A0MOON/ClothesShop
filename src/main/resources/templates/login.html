@@ -4,8 +4,6 @@
     <title>Login Page</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <link href="/css/loginstyles.css" rel="stylesheet">
-
-
 </head>
 <body>
 <div class="container">
@@ -21,14 +19,11 @@
                 <h3>비밀번호</h3>
                 <input type="password" name="password" class="form-input" placeholder="비밀번호를 입력하세요" required>
             </div>
-            <!-- 실패 메시지를 표시할 영역 -->
             <div th:if="${error}" class="error-message">
                 아이디 또는 비밀번호를 확인해주세요
             </div>
             <button type="submit" class="form-button">로그인</button>
         </form>
-
-
 
 
         <a href="/login/id-finder" class="form-link">아이디 찾기</a>
@@ -37,8 +32,6 @@
 
         <button onclick="location.href='/login/signup'" class="form-button2">회원가입</button>
         <button onclick="location.href='/login/kakao-signup'" class="form-button2">카카오로 시작하기</button>
-
-
     </div>
 
     <div th:replace="fragments/footer :: footer"/>
