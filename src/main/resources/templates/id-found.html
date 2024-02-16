@@ -1,0 +1,23 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>아이디 찾기 완료</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link href="/css/loginstyles.css" rel="stylesheet">
+</head>
+<body>
+    <div th:replace="fragments/bodyHeader :: bodyHeader"/>
+    <div class="container">
+    <div class="id-found">
+        <h2>아이디 찾기 완료</h2>
+        <div class="form-input-group">
+            <h6>아이디</h6>
+            <input type="text" th:value="${loginId}" class="form-input" readonly>
+        </div>
+        <button onclick="location.href='/login/login'" class="form-button">로그인</button>
+        <button onclick="location.href='/login/login'" class="form-button">비밀번호 찾기</button>
+    </div>
+    <div th:replace="fragments/footer :: footer"/>
+</div>
+</body>
+</html>

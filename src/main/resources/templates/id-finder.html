@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>id-finder Page</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link href="/css/loginstyles.css" rel="stylesheet">
+
+
+</head>
+<body>
+    <div th:replace="fragments/bodyHeader :: bodyHeader"/>
+    <div class="container">
+    <div class="id-finder">
+        <h2>아이디 찾기</h2>
+        <form action="/login/id-finder" method="post">
+            <div class="form-input-group">
+                <h3>이름</h3>
+                <input type="text" name="name" class="form-input" placeholder="이름을 입력하세요" required>
+            </div>
+            <div class="form-input-group">
+                <h3>이메일로 찾기</h3>
+                <input type="email" name="email" class="form-input" placeholder="이메일을 입력하세요" required>
+            </div>
+            <div th:if="${error}" class="error-message">
+                회원 정보가 없습니다.
+            </div>
+            <button type="submit" class="form-button">확인</button>
+        </form>
+
+    </div>
+
+    <div th:replace="fragments/footer :: footer"/>
+</div>
+</body>
+</html>

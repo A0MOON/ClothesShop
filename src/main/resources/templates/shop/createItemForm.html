@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Page</title>
+    <link href="/css/shopstyles.css" rel="stylesheet">
+</head>
+
+<body>
+<div th:replace="fragments/bodyHeader :: bodyHeader"/>
+
+</div>
+
+    <div class="right-section">
+        <h2>상품 등록</h2>
+        <form action="/items/new" method="post">
+            <div class="form-group">
+                <input type="text" name="name" class="form-control" placeholder="상품명을 입력하세요">
+            </div>
+            <div class="form-group">
+                <input type="number" name="price" class="form-control" placeholder="가격을 입력하세요">
+            </div>
+            <div class="form-group">
+                <input type="number" name="stockQuantity" class="form-control" placeholder="수량을 입력하세요">
+            </div>
+            <div class="form-group">
+                <textarea name="description" class="form-control" placeholder="상품에 대한 설명을 입력하세요"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="image">상품 이미지 업로드</label>
+                <input type="file" name="image" id="image" accept="image/*">
+            </div>
+            <button type="submit" class="btn btn-primary">상품 등록</button>
+        </form>
+    </div>
+
+</body>
+</html>

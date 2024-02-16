@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+<div class="product-container">
+    <h2>상품 목록</h2>
+    <div class="product-list">
+        <ul>
+            <li th:each="product : ${productList}">
+                <div class="product-box">
+                    <img th:src="${product.imageUrl}" alt="Product Image">
+                    <div class="product-info">
+                        <h3 th:text="${product.name}">Product Name</h3>
+                        <p th:text="${product.price}">Price</p>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+</body>
+</html>
