@@ -70,4 +70,8 @@ public class Member {
         this.password = newPassword;
     }
 
+
+    public Order get(int i) {
+        return null;
+    }
 }

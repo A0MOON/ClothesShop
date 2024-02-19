@@ -5,4 +5,9 @@ public enum OrderStatus {
     SHIPPED, //배송 중
     DELIVERED, // 배송 완료
     CANCELED // 주문 취소됨
+    ;
+
+    public void setOrder(Order order) {
+
+    }
 }

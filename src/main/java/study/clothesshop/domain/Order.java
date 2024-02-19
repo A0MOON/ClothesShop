@@ -3,14 +3,14 @@ package study.clothesshop.domain;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
-import org.springframework.data.util.Lazy;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Getter
+@Getter @Setter
 @Table(name = "orders")
 public class Order {
 
@@ -44,15 +44,35 @@ public class Order {
     @JsonIgnore
     @OneToMany(mappedBy = "order")
     private List<OrderItem> orderItems = new ArrayList<>();
+    //private OrderStatus status;
 
-    // 연관관계 메서드
+
+    public static Order createOrder(Member member, Item item, int price, int quantity) {
+        Order order = new Order();
+        order.setMember(member);
+
+        OrderItem orderItem = OrderItem.createOrderItem(item, price, quantity);
+        order.addOrderItem(orderItem);
+
+        order.setOrderStatus(OrderStatus.PAID);
+        order.setOrderDate(LocalDateTime.now());
+
+        return order;
+    }
+
     public void setMember(Member member) {
         this.member = member;
         member.getOrders().add(this);
     }
 
     public void addOrderItem(OrderItem orderItem) {
+        orderItems.add(orderItem);
+        orderItem.setOrder(this);
+    }
 
+    public void setDelivery(Delivery delivery) {
+        this.delivery = delivery;
+        delivery.setOrder(this);
     }
 
 }

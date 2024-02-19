@@ -1,13 +1,11 @@
-package study.clothesshop.web;
+package study.clothesshop.loginweb;
 
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class passwordFinderForm {
-    private String name;
-    private String email;
+public class LoginForm {
     private String loginId;
     private String password;
 }

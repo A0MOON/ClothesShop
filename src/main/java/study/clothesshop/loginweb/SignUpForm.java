@@ -1,4 +1,4 @@
-package study.clothesshop.web;
+package study.clothesshop.loginweb;
 
 import lombok.Getter;
 import lombok.Setter;

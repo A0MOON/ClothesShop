@@ -1,8 +1,8 @@
 package study.clothesshop.domain;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
-import lombok.Setter;
+
+import java.util.Objects;
 
 @Entity
 @Getter //@Setter
@@ -23,9 +23,29 @@ public class Delivery {
     private Order order;
 
 
-    public void setAddress(Address address) {
+
+
+
+   /* public static Delivery createDelivery(Member member) {
+        return new Delivery(member);
     }
 
-    public void setStatus(DeliveryStatus deliveryStatus) {
+    public Delivery(Member member) {
     }
+
+*/
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+
+    public void setOrder(Order order) {
+        this.order = order;
+    }
+
+    public void setStatus(DeliveryStatus status) {
+
+        this.status = status;
+    }
+
 }

@@ -30,10 +30,5 @@ public class ItemService {
         return itemRepository.findAll();
     }
 
-    public List<Item> getAllItems() {
-        return itemRepository.findAll();
-    }
-
-
 
 }

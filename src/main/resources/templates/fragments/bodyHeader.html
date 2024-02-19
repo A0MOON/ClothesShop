@@ -3,25 +3,24 @@
 <head>
     <!--<link rel="stylesheet" href="/css/styles.css">-->
     <link rel="stylesheet" th:href="@{/css/styles.css}" />
-    <script>
-        function showTopPreview() {
-            var topPreview = document.getElementById("top-preview");
-            topPreview.innerHTML = "<h3>Top 페이지 미리보기</h3><p>이곳에 top 페이지 내용이 표시됩니다.</p>";
-            topPreview.style.top = (document.querySelector('.header').offsetHeight + 10) + "px";
-            topPreview.style.left = document.querySelector('.navigation').offsetLeft + "px";
-            topPreview.style.display = "block";
-        }
-    </script>
+
 
 </head>
 <body>
+<!-- 헤더 부분 -->
 <div class="header" th:fragment="bodyHeader">
     <a href="/" class="ahyrob-link"><h3 class="text-muted">ahyrob</h3></a>
     <div class="navigation">
         <a href="/shop/shop">Shop</a>
         <a href="/customercenter/customercenter">Customer Center</a>
         <a href="/cart/cart">Cart</a>
-        <a href="/login/login">Login</a>
+        <!-- 로그인 상태에 따라 다른 메뉴 표시 -->
+        <div th:if="${session.loggedInUserId}">
+            <a href="/mypage">My Page</a>
+        </div>
+        <div th:unless="${session.loggedInUserId}">
+            <a href="/login/login">Login</a>
+        </div>
     </div>
 </div>
 

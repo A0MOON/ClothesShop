@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import study.clothesshop.domain.Member;
 import study.clothesshop.service.MemberService;
-import study.clothesshop.web.*;
+import study.clothesshop.loginweb.*;
 
 
 @Controller
@@ -49,7 +49,7 @@ public class MemberController {
     }
 
     @PostMapping("login/login")
-    public String login(@ModelAttribute("loginForm") LoginForm loginForm, Model model) {
+    public String login(@ModelAttribute("loginForm") LoginForm loginForm, Model model, HttpSession session) {
         String loginId = loginForm.getLoginId();
         String password = loginForm.getPassword();
         boolean login = memberService.login(loginId, password);
@@ -59,7 +59,7 @@ public class MemberController {
             model.addAttribute("error", true);
             return "login";
         } else {
-            // 로그인 성공 처리
+            session.setAttribute("loggedInUserId", loginId); // 사용자 아이디를 세션에 저장
             return "redirect:/";
         }
     }

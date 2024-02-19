@@ -2,17 +2,21 @@ package study.clothesshop.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import org.springframework.stereotype.Repository;
 import study.clothesshop.domain.Item;
 
 import java.util.List;
 import java.util.Optional;
 
+@Repository
 public interface ItemRepository extends JpaRepository<Item, Long> {
 
-    // 상품 조회 단건 조회
+   // Optional<Item> findById(Long id);
     Optional<Item> findById(Long id);
 
     List<Item> findAll();
+
+
 
 
 

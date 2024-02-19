@@ -9,7 +9,6 @@ import study.clothesshop.domain.Member;
 import study.clothesshop.repository.MemberRepository;
 
 import java.util.List;
-import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
