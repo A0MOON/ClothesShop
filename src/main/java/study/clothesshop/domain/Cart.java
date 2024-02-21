@@ -57,4 +57,11 @@ public class Cart {
         cartItem.getCart().getCartItems().remove(cartItem);
         cartItem.setCart(null);
     }
+
+    public void clearCart() {
+        cartItem.clear();
+    }
+
+
+
 }

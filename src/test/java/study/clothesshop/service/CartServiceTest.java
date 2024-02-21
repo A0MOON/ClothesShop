@@ -5,10 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
-import study.clothesshop.domain.Cart;
-import study.clothesshop.domain.CartItem;
-import study.clothesshop.domain.Item;
-import study.clothesshop.domain.Member;
+import study.clothesshop.domain.*;
 import study.clothesshop.repository.CartRepository;
 import study.clothesshop.repository.ItemRepository;
 import study.clothesshop.repository.MemberRepository;
@@ -16,8 +13,7 @@ import study.clothesshop.repository.MemberRepository;
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @Transactional
@@ -175,6 +171,60 @@ class CartServiceTest {
         CartItem updatedCartItem = updatedCart.getCartItems().get(0);
         assertNotNull(updatedCartItem);
         assertEquals(newQuantity, updatedCartItem.getQuantity());
+    }
+
+    @Test
+    @Rollback(value = false)
+    void 장바구니상품주문() {
+        // Given
+        Member member = new Member();
+        member.setLoginId("testuser");
+        member.setName("Test User");
+        memberRepository.save(member);
+
+        Item item1 = new Item();
+        item1.setName("Test Item 1");
+        item1.setPrice(10000);
+        item1.setStockQuantity(10);
+        itemRepository.save(item1);
+
+        Item item2 = new Item();
+        item2.setName("Test Item 2");
+        item2.setPrice(20000);
+        item2.setStockQuantity(5);
+        itemRepository.save(item2);
+
+        Cart cart = new Cart();
+        cart.setMember(member);
+        CartItem cartItem1 = new CartItem();
+        cartItem1.setItem(item1);
+        cartItem1.setQuantity(2);
+        CartItem cartItem2 = new CartItem();
+        cartItem2.setItem(item2);
+        cartItem2.setQuantity(1);
+        cart.addCartItem(cartItem1);
+        cart.addCartItem(cartItem2);
+        cartRepository.save(cart);
+
+        // When
+        Order order = cartService.orderCartItems(member.getId());
+
+        // Then
+        assertNotNull(order);
+        assertEquals(member, order.getMember());
+        assertEquals(2, order.getOrderItems().size());
+
+        // 장바구니가 비어있는지 확인
+        List<CartItem> cartItems = cart.getCartItems();
+        assertTrue(cartItems.isEmpty());
+
+        // 주문 후 상품의 재고가 감소했는지 확인
+        Item updatedItem1 = itemRepository.findById(item1.getId()).orElse(null);
+        Item updatedItem2 = itemRepository.findById(item2.getId()).orElse(null);
+        assertNotNull(updatedItem1);
+        assertNotNull(updatedItem2);
+        assertEquals(8, updatedItem1.getStockQuantity());
+        assertEquals(4, updatedItem2.getStockQuantity());
     }
 
 

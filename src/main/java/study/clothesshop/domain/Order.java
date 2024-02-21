@@ -75,4 +75,25 @@ public class Order {
         delivery.setOrder(this);
     }
 
+    // method
+
+
+
+    public static Order createOrder(Member member) {
+        Order order = new Order();
+        order.setMember(member);
+        return order;
+    }
+
+    // OrderItem 추가 메서드
+    public void addOrderItem(Item item, int quantity) {
+        OrderItem orderItem = new OrderItem();
+        orderItem.setItem(item);
+        orderItem.setQuantity(quantity);
+        orderItem.setOrder(this);
+        orderItems.add(orderItem);
+    }
+
+
+
 }

@@ -4,14 +4,13 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import study.clothesshop.domain.Cart;
-import study.clothesshop.domain.CartItem;
-import study.clothesshop.domain.Item;
-import study.clothesshop.domain.Member;
+import study.clothesshop.domain.*;
 import study.clothesshop.repository.CartRepository;
 import study.clothesshop.repository.ItemRepository;
 import study.clothesshop.repository.MemberRepository;
+import study.clothesshop.repository.OrderRepository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,6 +22,7 @@ public class CartService {
     private final MemberRepository memberRepository;
     private final ItemRepository itemRepository;
     private final CartRepository cartRepository;
+    private final OrderRepository orderRepository;
 
     // 장바구니 상품 추가
     public void addToCart(Long memberId, Long itemId, int quantity) {
@@ -91,6 +91,40 @@ public class CartService {
         return cartRepository.findCartItemById(cartItemId)
                 .orElseThrow(() -> new IllegalArgumentException("해당 장바구니 상품이 존재하지 않습니다."));
     }
+
+    // 장바구니에 담긴 상품 주문하기
+    public Order orderCartItems(Long memberId) {
+        Cart cart = cartRepository.findByMemberId(memberId)
+                .orElseThrow(() -> new IllegalArgumentException("해당 회원의 장바구니가 존재하지 않습니다."));
+
+        // 장바구니에 상품이 없는 경우
+        if (cart.getCartItems().isEmpty()) {
+            throw new IllegalStateException("장바구니에 상품이 없습니다.");
+        }
+
+        Member member = cart.getMember();
+
+        Order order = Order.createOrder(member);
+
+        for (CartItem cartItem : cart.getCartItems()) {
+            order.addOrderItem(cartItem.getItem(), cartItem.getQuantity());
+
+            // 주문한 상품의 재고를 감소시킴
+            Item item = cartItem.getItem();
+            item.removeStock(cartItem.getQuantity());
+            itemRepository.save(item);
+        }
+
+        order.setOrderDate(LocalDateTime.now());
+
+        orderRepository.save(order);
+
+        // 장바구니 비우기
+        cart.clearCart();
+
+        return order;
+    }
+
 
 
 
