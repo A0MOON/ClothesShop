@@ -13,6 +13,7 @@ import study.clothesshop.repository.ItemRepository;
 import study.clothesshop.repository.MemberRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -53,24 +54,42 @@ public class CartService {
 
     // 장바구니 상품 목록 조회
     public List<CartItem> getCartItems(Long memberId) {
-        Cart cart = cartRepository.findByMemberId(memberId)
-                .orElseThrow(() -> new IllegalArgumentException("해당 회원의 장바구니가 존재하지 않습니다."));
+        Cart cart = getCartByMemberId(memberId);
         return cart.getCartItems();
     }
 
     // 장바구니 상품 삭제
+    @Transactional
     public void removeCartItem(Long cartItemId) {
-        CartItem cartItem = cartRepository.findCartItemById(cartItemId)
-                .orElseThrow(() -> new IllegalArgumentException("해당 장바구니 상품이 존재하지 않습니다."));
-
+        CartItem cartItem = getCartItemById(cartItemId);
         Cart cart = cartItem.getCart();
-        List<CartItem> cartItems = cart.getCartItems();
-        if (!cartItems.contains(cartItem)) {
+        cart.removeCartItem(cartItem);
+        cartRepository.save(cart);
+    }
+
+    // 장바구니 상품 수량 수정
+    public void updateCartItemQuantity(Long cartItemId, int newQuantity) {
+        Optional<CartItem> optionalCartItem = cartRepository.findCartItemById(cartItemId);
+        if (optionalCartItem.isPresent()) {
+            CartItem cartItem = optionalCartItem.get();
+            cartItem.setQuantity(newQuantity);
+            cartRepository.save(cartItem.getCart());
+        } else {
+            // 장바구니 상품이 존재하지 않으면 새로운 장바구니 상품을 추가
             throw new IllegalArgumentException("해당 장바구니 상품이 존재하지 않습니다.");
         }
+    }
 
-        cartItems.remove(cartItem);
-        cartRepository.save(cart);
+    // 회원 ID로 장바구니 조회
+    private Cart getCartByMemberId(Long memberId) {
+        return cartRepository.findByMemberId(memberId)
+                .orElseThrow(() -> new IllegalArgumentException("해당 회원의 장바구니가 존재하지 않습니다."));
+    }
+
+    // 장바구니 상품 ID로 장바구니 상품 조회
+    private CartItem getCartItemById(Long cartItemId) {
+        return cartRepository.findCartItemById(cartItemId)
+                .orElseThrow(() -> new IllegalArgumentException("해당 장바구니 상품이 존재하지 않습니다."));
     }
 
 

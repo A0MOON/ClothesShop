@@ -21,6 +21,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @SpringBootTest
 @Transactional
+@Rollback(value = false)
 class CartServiceTest {
 
     @Autowired
@@ -138,6 +139,45 @@ class CartServiceTest {
                 .orElseThrow(() -> new RuntimeException("장바구니를 찾을 수 없습니다."));
         assertEquals(0, updatedCart.getCartItems().size());
     }
+
+    @Test
+    @Rollback(value = false)
+    void updateCartItemQuantity() {
+        // Given
+        Member member = new Member();
+        member.setLoginId("testuser");
+        member.setName("Test User");
+        memberRepository.save(member);
+
+        Item item = new Item();
+        item.setName("Test Item");
+        item.setPrice(10000);
+        item.setStockQuantity(10);
+        itemRepository.save(item);
+
+        Cart cart = new Cart();
+        cart.setMember(member);
+
+        CartItem cartItem = new CartItem();
+        cartItem.setItem(item);
+        cartItem.setQuantity(2);
+
+        cart.addCartItem(cartItem);
+        cartRepository.save(cart);
+
+        // When
+        int newQuantity = 3;
+        cartService.updateCartItemQuantity(cartItem.getId(), newQuantity);
+
+        // Then
+        Cart updatedCart = cartRepository.findById(cart.getId())
+                .orElseThrow(() -> new RuntimeException("장바구니를 찾을 수 없습니다."));
+        CartItem updatedCartItem = updatedCart.getCartItems().get(0);
+        assertNotNull(updatedCartItem);
+        assertEquals(newQuantity, updatedCartItem.getQuantity());
+    }
+
+
 
 
 
