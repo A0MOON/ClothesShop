@@ -1,7 +1,7 @@
 package study.clothesshop.service;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import study.clothesshop.domain.Cart;
@@ -9,11 +9,10 @@ import study.clothesshop.domain.CartItem;
 import study.clothesshop.domain.Item;
 import study.clothesshop.domain.Member;
 import study.clothesshop.repository.CartRepository;
-import study.clothesshop.repository.CartItemRepository;
 import study.clothesshop.repository.ItemRepository;
 import study.clothesshop.repository.MemberRepository;
 
-import java.util.Optional;
+import java.util.List;
 
 @Service
 @Transactional
@@ -21,66 +20,56 @@ import java.util.Optional;
 public class CartService {
 
     private final MemberRepository memberRepository;
-    private final CartRepository cartRepository;
     private final ItemRepository itemRepository;
-    private final CartItemRepository cartItemRepository;
+    private final CartRepository cartRepository;
 
-    public void addItemToCart(Long memberId, Long itemId, int quantity) {
-        Member member = memberRepository.findById(memberId).orElseThrow(() -> new IllegalArgumentException("Member not found"));
-        Item item = itemRepository.findById(itemId).orElseThrow(() -> new IllegalArgumentException("Item not found"));
+    // 장바구니 상품 추가
+    public void addToCart(Long memberId, Long itemId, int quantity) {
+        Member member = memberRepository.findById(memberId)
+                .orElseThrow(() -> new IllegalArgumentException("해당 회원이 없습니다."));
+
+        Item item = itemRepository.findById(itemId)
+                .orElseThrow(() -> new IllegalArgumentException("해당 상품이 없습니다."));
 
         Cart cart = member.getCart();
         if (cart == null) {
             cart = new Cart();
             cart.setMember(member);
-            cartRepository.save(cart);
+            member.setCart(cart);
         }
 
-        // 상품이 장바구니에 있는지 체크
-        boolean itemAlreadyInCart = cart.getCartItem().stream()
-                .anyMatch(cartItem -> cartItem.getItem().getId().equals(itemId));
-
-        if (itemAlreadyInCart) {
-            // 상품이 장바구니에 있다면 수량 1 증가
-            CartItem existingCartItem = cart.getCartItem().stream()
-                    .filter(cartItem -> cartItem.getItem().getId().equals(itemId))
-                    .findFirst().orElseThrow(() -> new IllegalArgumentException("Cart item not found"));
-            existingCartItem.setQuantity(existingCartItem.getQuantity() + quantity);
-        } else {
-            // 상품이 카트에 없을 때
-            CartItem cartItem = new CartItem();
-            cartItem.setCart(cart);
+        CartItem cartItem = cart.findCartItemByItem(item);
+        if (cartItem == null) {
+            cartItem = new CartItem();
             cartItem.setItem(item);
             cartItem.setQuantity(quantity);
-            cart.getCartItem().add(cartItem);
+            cart.addCartItem(cartItem);
+        } else {
+            cartItem.setQuantity(cartItem.getQuantity() + quantity);
         }
 
         cartRepository.save(cart);
     }
 
-    @Transactional
-    public void removeItemFromCart(Long cartId, Long cartItemId) {
-        // Check if the cart exists
-        Optional<Cart> optionalCart = cartRepository.findById(cartId);
-        if (!optionalCart.isPresent()) {
-            throw new IllegalArgumentException("Cart not found with id: " + cartId);
-        }
-        Cart cart = optionalCart.get();
+    // 장바구니 상품 목록 조회
+    public List<CartItem> getCartItems(Long memberId) {
+        Cart cart = cartRepository.findByMemberId(memberId)
+                .orElseThrow(() -> new IllegalArgumentException("해당 회원의 장바구니가 존재하지 않습니다."));
+        return cart.getCartItems();
+    }
 
-        // Check if the cart item exists
-        Optional<CartItem> optionalCartItem = cartItemRepository.findById(cartItemId);
-        if (!optionalCartItem.isPresent()) {
-            throw new IllegalArgumentException("Cart item not found with id: " + cartItemId);
-        }
-        CartItem cartItem = optionalCartItem.get();
+    // 장바구니 상품 삭제
+    public void removeCartItem(Long cartItemId) {
+        CartItem cartItem = cartRepository.findCartItemById(cartItemId)
+                .orElseThrow(() -> new IllegalArgumentException("해당 장바구니 상품이 존재하지 않습니다."));
 
-        // Check if the cart contains the cart item
-        if (!cart.getCartItem().contains(cartItem)) {
-            throw new IllegalArgumentException("Cart item not found in the cart");
+        Cart cart = cartItem.getCart();
+        List<CartItem> cartItems = cart.getCartItems();
+        if (!cartItems.contains(cartItem)) {
+            throw new IllegalArgumentException("해당 장바구니 상품이 존재하지 않습니다.");
         }
 
-        // Remove the cart item from the cart and update the cart
-        cart.getCartItem().remove(cartItem);
+        cartItems.remove(cartItem);
         cartRepository.save(cart);
     }
 
@@ -88,3 +77,5 @@ public class CartService {
 
 
 }
+
+

@@ -31,4 +31,14 @@ public class CartItem {
     public int getQuantity() {
         return quantity;
     }
+
+
+    public void add(CartItem cartItem) {
+        if (this.item.equals(cartItem.getItem())) {
+            this.quantity += cartItem.getQuantity();
+        } else {
+            // Handle the case where the items are different
+            throw new IllegalArgumentException("Cannot add different items to the same cart item.");
+        }
+    }
 }
