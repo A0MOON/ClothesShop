@@ -2,7 +2,6 @@ package study.clothesshop.domain;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-import study.clothesshop.service.OrderService;
 
 @Entity
 @Getter @Setter
@@ -44,15 +43,6 @@ public class OrderItem {
         item.removeStock(quantity);
         return orderItem;
     }
-    //==비즈니스 로직==//
-    /** 주문 취소 */
-    public void cancel() {
-        getItem().addStock(quantity);
-    }
-    //==조회 로직==//
-    /** 주문상품 전체 가격 조회 */
-    public int getTotalPrice() {
-        return getPrice() * getQuantity();
-    }
+
 
 }

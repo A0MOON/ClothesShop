@@ -44,8 +44,12 @@ public class Order {
     @JsonIgnore
     @OneToMany(mappedBy = "order")
     private List<OrderItem> orderItems = new ArrayList<>();
-    //private OrderStatus status;
 
+
+
+
+
+    // 비지니스 메서드
 
     public static Order createOrder(Member member, Item item, int price, int quantity) {
         Order order = new Order();
@@ -70,14 +74,7 @@ public class Order {
         orderItem.setOrder(this);
     }
 
-    public void setDelivery(Delivery delivery) {
-        this.delivery = delivery;
-        delivery.setOrder(this);
-    }
-
     // method
-
-
 
     public static Order createOrder(Member member) {
         Order order = new Order();

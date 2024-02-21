@@ -3,8 +3,7 @@ package study.clothesshop.domain;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-import study.clothesshop.domain.*;
-import study.clothesshop.exception.NotEnoughStockException;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,10 +24,6 @@ public class Item {
     private String description;
 
     // 2.
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "category_id")
-    private Category category;
-
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "admin_item_id")
     // @OneToOne(fetch = FetchType.LAZY, mappedBy = "item")
@@ -56,21 +51,15 @@ public class Item {
     private List<RecentlyViewedItem> recentlyViewedItems = new ArrayList<>();
 
 
-        //==비즈니스 로직==//
-        /**
-         * stock 증가
-         */
+    //
         public void addStock(int quantity) {
             this.stockQuantity += quantity;
         }
 
-        /**
-         * stock 감소
-         */
-        public void removeStock(int quantity) throws NotEnoughStockException {
+        public void removeStock(int quantity)  {
             int restStock = this.stockQuantity - quantity;
             if (restStock < 0) {
-                throw new NotEnoughStockException("need more stock");
+                throw new IllegalArgumentException("Not enough stock");
             }
             this.stockQuantity = restStock;
         }

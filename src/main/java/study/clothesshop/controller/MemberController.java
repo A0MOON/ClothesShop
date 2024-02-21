@@ -19,13 +19,13 @@ public class MemberController {
     private final MemberService memberService;
 
     // 회원가입
-    @GetMapping(value = "/login/signup")
+    @GetMapping(value = "/users/signup")
     public String signUpForm(Model model) {
         model.addAttribute("signupForm", new SignUpForm());
         return "signup";
     }
 
-    @PostMapping(value = "/login/signup")
+    @PostMapping(value = "/users/signup")
     public String signUp(@Validated MemberForm form, BindingResult result) {
         if (result.hasErrors()) {
             return "signup";
@@ -42,13 +42,13 @@ public class MemberController {
     }
 
     // 로그인
-    @GetMapping(value = "/login/login")
+    @GetMapping(value = "/users/login")
     public String loginForm(Model model) {
         model.addAttribute("loginForm", new LoginForm());
         return "login";
     }
 
-    @PostMapping("login/login")
+    @PostMapping("users/login")
     public String login(@ModelAttribute("loginForm") LoginForm loginForm, Model model, HttpSession session) {
         String loginId = loginForm.getLoginId();
         String password = loginForm.getPassword();
@@ -65,13 +65,13 @@ public class MemberController {
     }
 
     // 아이디 찾기
-    @GetMapping(value = "/login/id-finder")
+    @GetMapping(value = "/users/id")
     public String idFinderForm(Model model) {
         model.addAttribute("idFinderForm", new IdFinderForm());
         return "id-finder";
     }
 
-    @PostMapping("/login/id-finder")
+    @PostMapping("/users/id")
     public String idFinder(@ModelAttribute("idFinderForm") IdFinderForm idFinderForm, Model model) {
         String name = idFinderForm.getName();
         String email = idFinderForm.getEmail();
@@ -89,13 +89,13 @@ public class MemberController {
 
     // 비밀번호 변경을 위한 회원 찾기
 
-    @GetMapping(value = "/login/password-finder")
+    @GetMapping(value = "/users/password/search")
     public String passwordFinderForm(Model model) {
         model.addAttribute("passwordFinderForm", new passwordFinderForm());
         return "password-finder";
     }
 
-    @PostMapping("/login/password-finder")
+    @PostMapping("/users/password/search")
     public String passwordFinder(@ModelAttribute("passwordFinderForm") passwordFinderForm passwordFinderForm, Model model, HttpSession session) {
         String loginId = passwordFinderForm.getLoginId();
         String name = passwordFinderForm.getName();
@@ -119,14 +119,13 @@ public class MemberController {
     }
 
     // 비밀번호 변경
-
-    @GetMapping(value = "/login/password-found")
+    @GetMapping(value = "/users/password")
     public String passwordFoundForm1(Model model) {
         model.addAttribute("passwordFoundForm", new passwordFoundForm());
         return "password-found";
     }
 
-    @PostMapping("/login/password-found")
+    @PostMapping("/users/password")
     public String changePassword(HttpSession session,
                                  @RequestParam("newPassword") String newPassword,
                                  @RequestParam("confirmPassword") String confirmPassword,

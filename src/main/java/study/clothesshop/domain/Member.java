@@ -18,17 +18,14 @@ public class Member {
     @Column(name = "member_id")
     private Long id;
 
-    //@NotEmpty(me)
     @Column(unique = true)
     private String loginId; // 사용자 아이디
 
     @Column(unique = true)
     private String name;
 
-    //@NotEmpty
     private String password;
     @Embedded
-
     private Address address;
     private String phone;
     @Column(unique = true)
@@ -66,12 +63,5 @@ public class Member {
     @OneToMany(mappedBy = "member")
     private List<Review> reviews = new ArrayList<>();
 
-    public void changePassword(String newPassword) {
-        this.password = newPassword;
-    }
 
-
-    public Order get(int i) {
-        return null;
-    }
 }

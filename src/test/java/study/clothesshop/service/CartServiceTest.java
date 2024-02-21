@@ -15,6 +15,7 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+// 수정 필요
 @SpringBootTest
 @Transactional
 @Rollback(value = false)
@@ -37,12 +38,12 @@ class CartServiceTest {
     void 장바구니_상품추가() {
         // Given
         Member member = new Member();
-        member.setLoginId("testuser");
-        member.setName("Test User");
+        member.setLoginId("testuser1");
+        member.setName("Test User1");
         memberRepository.save(member);
 
         Item item = new Item();
-        item.setName("Test Item");
+        item.setName("Test Item1");
         item.setPrice(10000);
         item.setStockQuantity(10);
         itemRepository.save(item);
@@ -66,18 +67,18 @@ class CartServiceTest {
     void 장바구니상품목록조회() {
         // Given
         Member member = new Member();
-        member.setLoginId("testuser");
-        member.setName("Test User");
+        member.setLoginId("testuser2");
+        member.setName("Test User2");
         memberRepository.save(member);
 
         Item item1 = new Item();
-        item1.setName("Test Item 1");
+        item1.setName("Test Item 2-1");
         item1.setPrice(10000);
         item1.setStockQuantity(10);
         itemRepository.save(item1);
 
         Item item2 = new Item();
-        item2.setName("Test Item 2");
+        item2.setName("Test Item 2-2");
         item2.setPrice(20000);
         item2.setStockQuantity(5);
         itemRepository.save(item2);
@@ -107,12 +108,12 @@ class CartServiceTest {
     void removeCartItem() {
         // Given
         Member member = new Member();
-        member.setLoginId("testuser");
-        member.setName("Test User");
+        member.setLoginId("testuser3");
+        member.setName("Test User3");
         memberRepository.save(member);
 
         Item item = new Item();
-        item.setName("Test Item");
+        item.setName("Test Item3");
         item.setPrice(10000);
         item.setStockQuantity(10);
         itemRepository.save(item);
@@ -141,12 +142,12 @@ class CartServiceTest {
     void updateCartItemQuantity() {
         // Given
         Member member = new Member();
-        member.setLoginId("testuser");
-        member.setName("Test User");
+        member.setLoginId("testuser4");
+        member.setName("Test User4");
         memberRepository.save(member);
 
         Item item = new Item();
-        item.setName("Test Item");
+        item.setName("Test Item4");
         item.setPrice(10000);
         item.setStockQuantity(10);
         itemRepository.save(item);
@@ -178,18 +179,18 @@ class CartServiceTest {
     void 장바구니상품주문() {
         // Given
         Member member = new Member();
-        member.setLoginId("testuser");
-        member.setName("Test User");
+        member.setLoginId("testuser5");
+        member.setName("Test User5");
         memberRepository.save(member);
 
         Item item1 = new Item();
-        item1.setName("Test Item 1");
+        item1.setName("Test Item 5-1");
         item1.setPrice(10000);
         item1.setStockQuantity(10);
         itemRepository.save(item1);
 
         Item item2 = new Item();
-        item2.setName("Test Item 2");
+        item2.setName("Test Item 5-2");
         item2.setPrice(20000);
         item2.setStockQuantity(5);
         itemRepository.save(item2);

@@ -49,18 +49,14 @@ public class MemberService {
     @Transactional(readOnly = true)
     public String findLoginIdByNameAndEmail(String name, String email) {
         Optional<Member> loginIdByNameAndEmail = memberRepository.findLoginIdByNameAndEmail(name, email);
-        if (loginIdByNameAndEmail.isPresent()) {
-            Member member = loginIdByNameAndEmail.get();
-            return member.getLoginId();
-        }
-        return null; // 회원이 존재하지 않는 경우 null 반환
+        Member member = loginIdByNameAndEmail.get();
+        return member.getLoginId();
     }
 
     // 로그인
     public boolean login(String loginId, String password) {
 
         Member member = memberRepository.findByLoginId(loginId);
-
         if (member != null && member.getPassword().equals(password)) {
             return true;
         }
@@ -70,12 +66,32 @@ public class MemberService {
 
 
     // 비밀번호 변경을 위한 회원 정보 찾기
-
     public Member findPasswordByLoginIdAndNameAndEmail(String loginId, String name, String email) {
         Optional<Member> optionalMember = memberRepository.findByLoginIdAndNameAndEmail(loginId, name, email);
         return optionalMember.orElse(null);
     }
 
+    // 회원 탈퇴
+    public void withdraw(Long memberId) {
+        Member member = memberRepository.findById(memberId)
+                .orElseThrow(() -> new IllegalArgumentException("해당 회원이 존재하지 않습니다."));
+
+        memberRepository.delete(member);
+    }
+
+    // 이메일 수정
+    public void updateEmail(Long memberId, String newEmail) {
+        Member member = memberRepository.findById(memberId)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid member id"));
+        member.setEmail(newEmail);
+    }
+
+    // 휴대폰 번호 수정
+    public void updatePhoneNumber(Long memberId, String newPhoneNumber) {
+        Member member = memberRepository.findById(memberId)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid member id"));
+        member.setPhone(newPhoneNumber);
+    }
 
 
 }

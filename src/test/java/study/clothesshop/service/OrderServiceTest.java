@@ -1,11 +1,7 @@
 package study.clothesshop.service;
 
-import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
-import org.junit.Assert;
-import org.junit.jupiter.api.BeforeEach;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 import org.junit.jupiter.api.Test;
@@ -15,9 +11,6 @@ import study.clothesshop.repository.MemberRepository;
 import study.clothesshop.repository.OrderRepository;
 
 import java.util.List;
-import java.util.Optional;
-
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
@@ -39,17 +32,16 @@ public class OrderServiceTest {
     @Autowired
     private OrderService orderService;
 
-    @Rollback(value = true)
     @Test
     void 상품주문() {
         // Given
         Member member = new Member();
-        member.setLoginId("testuser");
-        member.setName("Test User");
+        member.setLoginId("testuser1");
+        member.setName("Test Use1");
         memberRepository.save(member);
 
         Item item = new Item();
-        item.setName("Test Item");
+        item.setName("Test Item1");
         item.setPrice(10000);
         item.setStockQuantity(10);
         itemRepository.save(item);
@@ -63,17 +55,16 @@ public class OrderServiceTest {
         assertNotNull(savedOrder);
     }
 
-    @Rollback(value = false)
     @Test
     void 주문내역조회() {
         // Given
         Member member = new Member();
-        member.setLoginId("testuser");
-        member.setName("Test User");
+        member.setLoginId("testuser2");
+        member.setName("Test User2");
         memberRepository.save(member);
 
         Item item = new Item();
-        item.setName("Test Item");
+        item.setName("Test Item2");
         item.setPrice(10000);
         item.setStockQuantity(10);
         itemRepository.save(item);
@@ -93,16 +84,15 @@ public class OrderServiceTest {
     }
 
     @Test
-    @Rollback(value = true)
     void 상품주문결제() {
         // Given
         Member member = new Member();
-        member.setLoginId("testuser");
-        member.setName("Test User");
+        member.setLoginId("testuser3");
+        member.setName("Test User3");
         memberRepository.save(member);
 
         Item item = new Item();
-        item.setName("Test Item");
+        item.setName("Test Item3");
         item.setPrice(10000);
         item.setStockQuantity(10);
         itemRepository.save(item);
@@ -120,16 +110,15 @@ public class OrderServiceTest {
     }
 
     @Test
-    @Rollback(value = true)
     void 주문결제내역조회() {
         // Given
         Member member = new Member();
-        member.setLoginId("testuser");
-        member.setName("Test User");
+        member.setLoginId("testuser4");
+        member.setName("Test User4");
         memberRepository.save(member);
 
         Item item = new Item();
-        item.setName("Test Item");
+        item.setName("Test Item4");
         item.setPrice(10000);
         item.setStockQuantity(10);
         itemRepository.save(item);

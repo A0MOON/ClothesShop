@@ -24,17 +24,6 @@ public class Delivery {
 
 
 
-
-
-   /* public static Delivery createDelivery(Member member) {
-        return new Delivery(member);
-    }
-
-    public Delivery(Member member) {
-    }
-
-*/
-
     public void setAddress(Address address) {
         this.address = address;
     }
