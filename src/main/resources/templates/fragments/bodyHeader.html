@@ -1,22 +1,31 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <!--<link rel="stylesheet" href="/css/styles.css">-->
-    <link rel="stylesheet" th:href="@{/css/styles.css}" />
-
-
 </head>
 <body>
-<!-- 헤더 부분 -->
+
 <div class="header" th:fragment="bodyHeader">
-    <a href="/" class="ahyrob-link"><h3 class="text-muted">ahyrob</h3></a>
+    <a href="/" class="logo"><h4 class="logo-font">ahyrob</h4></a>
+
     <div class="navigation">
-        <a href="/shop/shop">Shop</a>
-        <a href="/customercenter/customercenter">Customer Center</a>
-        <a href="/cart/cart">Cart</a>
+        <a href="/items/all">Shop</a>
+        <div class="hover">
+            <a href="/items/top">Top</a>
+            <br><a href="/items/bottom">Bottom</a>
+            <br><a href="/items/accessory">Accessory</a>
+        </div>
+
+        <a href="/customercenter/notice">Customer Center</a>
+        <div class="hover2">
+            <a href="/customercenter/notice">Notice</a>
+            <br><a href="/customercenter/question">Q&A</a>
+            <br><a href="/customercenter/review">Review</a>
+        </div>
+
+        <a href="/cart">Cart</a>
         <!-- 로그인 상태에 따라 다른 메뉴 표시 -->
         <div th:if="${session.loggedInUserId}">
-            <a href="/mypage">My Page</a>
+            <a href="/users/mypage">My Page</a>
         </div>
         <div th:unless="${session.loggedInUserId}">
             <a href="/users/login">Login</a>

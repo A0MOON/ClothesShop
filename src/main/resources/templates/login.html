@@ -3,11 +3,12 @@
 <head>
     <title>Login Page</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <link href="/css/loginstyles.css" rel="stylesheet">
+    <div th:replace="fragments/bodyHeader :: bodyHeader"></div>
+    <div th:replace="fragments/header :: header"></div>
 </head>
 <body>
 <div class="container">
-    <div th:replace="fragments/bodyHeader :: bodyHeader"/>
+
     <div class="login-form">
         <h2>로그인</h2>
         <form action="/users/login" method="post">

@@ -1,0 +1,47 @@
+.image-container1 {
+    position: absolute;
+    top: 100px; /* 원하는 수치로 조정 */
+    left: 200px; /* 원하는 수치로 조정 */
+}
+
+.image-description-name {
+    margin-left: 115px; /* 원하는 오른쪽 여백 값으로 조정 */
+    color: black;
+}
+
+.image-description-price {
+    margin-left: 170px; /* 원하는 오른쪽 여백 값으로 조정 */
+    color: black;
+}
+
+
+.image-description-container1 {
+    margin-left: 800px; /*글씨의 위치를 바꿀 때 그냥 top이ㅣ라고 하면 안되네?*/
+    margin-top: 280px;
+}
+
+
+.image-container2 {
+    position: absolute;
+    top: 600px;
+    left: 1000px;
+}
+
+.image-container3 {
+    position: absolute;
+    top: 900px;
+    left: 150px;
+}
+
+.image-container4 {
+    position: absolute;
+    top: 1200px;
+    left: 1200px;
+}
+
+.image-container5 {
+    position: absolute;
+    top: 1500px;
+    left: 400px;
+}
+
