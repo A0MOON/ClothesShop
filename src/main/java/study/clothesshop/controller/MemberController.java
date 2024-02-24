@@ -9,6 +9,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import study.clothesshop.domain.Member;
+import study.clothesshop.dto.ItemDTO;
 import study.clothesshop.service.MemberService;
 import study.clothesshop.loginweb.*;
 
@@ -144,6 +145,13 @@ public class MemberController {
         member.setPassword(newPassword);
         memberService.save(member);
         return "home";
+    }
+
+    // cart page
+    @GetMapping(value = "/users/cart") // url
+    public String CartForm(Model model) {
+        model.addAttribute("itemDTO", new ItemDTO());
+        return "cart/cart"; // html
     }
 
 
