@@ -3,22 +3,26 @@
 <head>
     <title>id-finder Page</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <link href="/css/loginstyles.css" rel="stylesheet">
+    <div th:replace="fragments/bodyHeader :: bodyHeader"></div>
+    <div th:replace="fragments/header :: header"></div>
 
 
 </head>
 <body>
-    <div th:replace="fragments/bodyHeader :: bodyHeader"/>
     <div class="container">
-    <div class="id-finder">
-        <h2>아이디 찾기</h2>
-        <form action="/users/id" method="post">
+    <div class="password-finder">
+        <h2>비밀번호 찾기</h2>
+        <form action="/users/password/search" method="post">
+            <div class="form-input-group">
+                <h3>아이디</h3>
+                <input type="text" name="loginId" class="form-input" placeholder="아이디를 입력하세요" required>
+            </div>
             <div class="form-input-group">
                 <h3>이름</h3>
                 <input type="text" name="name" class="form-input" placeholder="이름을 입력하세요" required>
             </div>
             <div class="form-input-group">
-                <h3>이메일로 찾기</h3>
+                <h3>이메일</h3>
                 <input type="email" name="email" class="form-input" placeholder="이메일을 입력하세요" required>
             </div>
             <div th:if="${error}" class="error-message">

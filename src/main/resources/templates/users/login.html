@@ -27,12 +27,10 @@
         </form>
 
 
-        <a href="/login/id-finder" class="form-link">아이디 찾기</a>
-        <a href="/login/password-finder" class="form-link">비밀번호 찾기</a>
-        <a href="/login/order-inquiry-non-member1" class="form-link">비회원 주문조회</a>
+        <a href="/users/id/search" class="form-link">아이디 찾기</a>
+        <a href="/users/password/search" class="form-link">비밀번호 찾기</a>
 
-        <button onclick="location.href='/login/signup'" class="form-button2">회원가입</button>
-        <button onclick="location.href='/login/kakao-signup'" class="form-button2">카카오로 시작하기</button>
+        <button onclick="location.href='/users/signup'" class="form-button2">회원가입</button>
     </div>
 
     <div th:replace="fragments/footer :: footer"/>

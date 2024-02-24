@@ -3,14 +3,13 @@
 <head>
     <title>Login Page</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <link th:href="@{/css/loginstyles.css}"
-          href="/css/loginstyles.css" rel="stylesheet">
+    <div th:replace="fragments/bodyHeader :: bodyHeader"></div>
+    <div th:replace="fragments/header :: header"></div>
 
 
 </head>
 <body>
 <div class="container">
-    <div th:replace="fragments/bodyHeader :: bodyHeader"/>
     <div class="signup-form">
         <h2>정보 입력</h2>
         <form th:action="@{/users/signup}" method="post" th:object="${SignUpForm}">

@@ -23,13 +23,13 @@ public class MemberController {
     @GetMapping(value = "/users/signup")
     public String signUpForm(Model model) {
         model.addAttribute("signupForm", new SignUpForm());
-        return "signup";
+        return "users/signup";
     }
 
     @PostMapping(value = "/users/signup")
     public String signUp(@Validated MemberForm form, BindingResult result) {
         if (result.hasErrors()) {
-            return "signup";
+            return "users/signup";
         }
         Member member = new Member();
         member.setName(form.getName());
@@ -46,7 +46,7 @@ public class MemberController {
     @GetMapping(value = "/users/login")
     public String loginForm(Model model) {
         model.addAttribute("loginForm", new LoginForm());
-        return "login";
+        return "users/login";
     }
 
     @PostMapping("users/login")
@@ -58,7 +58,7 @@ public class MemberController {
         if (!login) {
 
             model.addAttribute("error", true);
-            return "login";
+            return "users/login";
         } else {
             session.setAttribute("loggedInUserId", loginId); // 사용자 아이디를 세션에 저장
             return "redirect:/";
@@ -66,13 +66,13 @@ public class MemberController {
     }
 
     // 아이디 찾기
-    @GetMapping(value = "/users/id")
+    @GetMapping(value = "/users/id/search")
     public String idFinderForm(Model model) {
         model.addAttribute("idFinderForm", new IdFinderForm());
-        return "id-finder";
+        return "users/id/search"; // 확실해
     }
 
-    @PostMapping("/users/id")
+    @PostMapping("/users/id/search")
     public String idFinder(@ModelAttribute("idFinderForm") IdFinderForm idFinderForm, Model model) {
         String name = idFinderForm.getName();
         String email = idFinderForm.getEmail();
@@ -80,11 +80,11 @@ public class MemberController {
 
         if (findLoginId != null) {
             model.addAttribute("loginId", findLoginId);
-            return "id-found";
+            return "users/id/id";
         } else {
 
             model.addAttribute("error", true);
-            return "id-finder";
+            return "users/id/search";
         }
     }
 
@@ -93,7 +93,7 @@ public class MemberController {
     @GetMapping(value = "/users/password/search")
     public String passwordFinderForm(Model model) {
         model.addAttribute("passwordFinderForm", new passwordFinderForm());
-        return "password-finder";
+        return "users/password/search";
     }
 
     @PostMapping("/users/password/search")
@@ -111,35 +111,35 @@ public class MemberController {
             session.setAttribute("loggedInMember", member);
 
             model.addAttribute("loginId", loginId);
-            return "password-found";
+            return "users/password/password";
         } catch (IllegalArgumentException e) {
 
             model.addAttribute("error", true);
-            return "password-finder";
+            return "users/password/search";
         }
     }
 
     // 비밀번호 변경
-    @GetMapping(value = "/users/password")
+    @GetMapping(value = "/users/password/newpassword")
     public String passwordFoundForm1(Model model) {
         model.addAttribute("passwordFoundForm", new passwordFoundForm());
-        return "password-found";
+        return "/users/password/newpassword";
     }
 
-    @PostMapping("/users/password")
+    @PostMapping("/users/password/newpassword")
     public String changePassword(HttpSession session,
                                  @RequestParam("newPassword") String newPassword,
                                  @RequestParam("confirmPassword") String confirmPassword,
                                  Model model) {
         if (!newPassword.equals(confirmPassword)) {
             model.addAttribute("error", true);
-            return "password-found";
+            return "/users/password/newpassword";
         }
 
         Member member = (Member) session.getAttribute("loggedInMember");
 
         if (member == null) {
-            return "redirect:/login";
+            return "redirect:/users/login";
         }
 
         member.setPassword(newPassword);
