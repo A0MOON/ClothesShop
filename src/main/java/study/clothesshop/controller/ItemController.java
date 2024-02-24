@@ -20,10 +20,10 @@ public class ItemController {
 
     private final ItemService itemService;
 
-    @GetMapping(value = "/shop/shop") // url
+    @GetMapping(value = "/items/all") // url
     public String ItemForm(Model model) {
         model.addAttribute("itemDTO", new ItemDTO());
-        return "shop/shop"; // html
+        return "items/all"; // html
     }
 
     // 상품 등록
@@ -84,4 +84,24 @@ public class ItemController {
         return "redirect:/items";
     }
 
+    // top page
+    @GetMapping(value = "/items/top") // url
+    public String ItemTopForm(Model model) {
+        model.addAttribute("itemDTO", new ItemDTO());
+        return "items/top"; // html
+    }
+
+    // bottom page
+    @GetMapping(value = "/items/bottom") // url
+    public String ItemBottomForm(Model model) {
+        model.addAttribute("itemDTO", new ItemDTO());
+        return "items/bottom"; // html
+    }
+
+    // accessory page
+    @GetMapping(value = "/items/accessory") // url
+    public String ItemAccessoryForm(Model model) {
+        model.addAttribute("itemDTO", new ItemDTO());
+        return "items/accessory"; // html
+    }
 }

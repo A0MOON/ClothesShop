@@ -1,0 +1,45 @@
+.all a {
+    color: black;
+    text-decoration: none;
+    font-size: 40px;
+}
+
+.all {
+    margin-top: 70px;
+    margin-left: 70px;
+}
+
+.all:after {
+    content: "";
+    display: block;
+    width: 1530px;
+    border-bottom: 2px solid #ccc;
+    margin: 20px 0px;
+}
+
+
+.rounded-box {
+    width: 350px; /* 너비 */
+    height: 400px; /* 높이 */
+    background-color: #ffffff; /* 배경색 */
+    border-radius: 15px; /* 모서리 둥글게 설정 */
+    padding: 20px; /* 내부 여백 */
+    border: 2px solid #ccc; /* 테두리 스타일과 색상 */
+    margin-left: 90px;
+    margin-top: 40px;
+    margin-right: 20px; /* 각 박스 사이의 간격 설정 */
+}
+
+.rounded-box img{
+    margin-left: 20px;
+}
+
+.rounded-box-title{
+    color: black;
+    text-align: center;
+}
+
+.rounded-box-price{
+    color: black;
+    text-align: center;
+}
