@@ -13,7 +13,9 @@ public class Notice {
     @Column(name = "notice_id")
     private Long id;
     private String noticeTitle;
-    private String notice;
+    private String noticeDate;
+    private String noticeWriter;
+    private String noticeContents;
 
     // 2.
     @ManyToOne(fetch = FetchType.LAZY)

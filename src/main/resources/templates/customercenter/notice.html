@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link href="/css/customercenter/notice.css" rel="stylesheet">
+    <div th:replace="fragments/bodyHeader :: bodyHeader"></div>
+    <div th:replace="fragments/header :: header"></div>
+</head>
+<body>
+<div class="notice">
+    <a href="/customercenter/notice">Notice</a>
+</div>
+<div>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>No.</th>
+            <th>Subject</th>
+            <th>Writer</th>
+            <th>Date</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="notice : ${notices}">
+            <td th:text="${notice.id}"></td>
+            <td th:text="${notice.noticeTitle}"></td>
+            <td th:text="${notice.noticeWriter}"></td>
+            <td th:text="${notice.noticeDate}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+
+
+
+</body>
+</html>
