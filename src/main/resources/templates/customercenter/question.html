@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link href="/css/customercenter/question.css" rel="stylesheet">
+    <div th:replace="fragments/bodyHeader :: bodyHeader"></div>
+    <div th:replace="fragments/header :: header"></div>
+</head>
+<body>
+<div class="question">
+    <a href="/customercenter/question">Question</a>
+</div>
+<div>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>No.</th>
+            <th>Subject</th>
+            <th>Writer</th>
+            <th>Date</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="notice : ${notices}">
+            <td th:text="${notice.id}"></td>
+            <td>
+                <a th:href="@{'/customercenter/notice/' + ${notice.id}}" th:text="${notice.noticeTitle}"></a>
+            </td>
+            <td th:text="${notice.noticeWriter}"></td>
+            <td th:text="${notice.noticeDate}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<script>
+    // 클릭한 리스트 항목에 대한 페이지로 이동하는 함수
+    function goToNoticePage(noticeId) {
+        window.location.href = '/customercenter/notice/' + noticeId;
+    }
+
+    // 각 리스트 항목에 클릭 이벤트 리스너 추가
+    document.querySelectorAll('.table tbody tr').forEach(row => {
+        row.addEventListener('click', function() {
+            const noticeId = row.querySelector('td:first-child').innerText;
+            goToNoticePage(noticeId);
+        });
+    });
+</script>
+
+
+
+</body>
+</html>
