@@ -35,7 +35,7 @@ public class CustomerCenterController {
     @GetMapping(value = "/customercenter/question") // url
     public String CustomerCenterQuestionForm() {
         log.info("question controller");
-        return "shop/itemList"; // html
+        return "customercenter/question"; // html
     }
 
     // notice 페이지 목록 조회
@@ -45,6 +45,15 @@ public class CustomerCenterController {
         model.addAttribute("notices", notices);
         return "customercenter/notice";
     }
+
+    // review 조회
+    @GetMapping(value = "/customercenter/review")
+    public String CustomerCenterReviewForm(Model model) {
+        List<Notice> notices = noticeService.findNotices();
+        model.addAttribute("notices", notices);
+        return "customercenter/review";
+    }
+
 
 
 }
