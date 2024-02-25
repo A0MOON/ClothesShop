@@ -146,12 +146,6 @@ public class MemberController {
         return "home";
     }
 
-    // cart page
-    @GetMapping(value = "/users/cart") // url
-    public String CartForm(Model model) {
-        model.addAttribute("itemDTO", new ItemDTO());
-        return "cart/cart"; // html
-    }
 
 
 }

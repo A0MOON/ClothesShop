@@ -1,28 +1,57 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-  <link href="/css/cart/cart.css" rel="stylesheet">
+  <meta charset="UTF-8">
+  <title>Shopping Cart</title>
+  <link rel="stylesheet" type="text/css" th:href="@{/css/cart/cart.css}">
   <div th:replace="fragments/bodyHeader :: bodyHeader"></div>
   <div th:replace="fragments/header :: header"></div>
 </head>
 <body>
+<div class="container">
 
 
-<div class="cart">
-  <a href="/users/cart">Cart</a>
+  <main>
+    <h1>Cart</h1>
+    <div class="cart-items">
+      <!-- Example of a cart item -->
+      <div class="cart-item" th:each="item : ${cartItems}">
+        <div class="item-details">
+          <img th:src="@{${item.imageUrl}}" alt="Item Image"/>
+          <div>
+            <span th:text="${item.name}">Item Name</span>
+            <span th:text="${item.price}">Item Price</span>
+            <span th:text="${item.color}">Color</span>
+            <span th:text="${item.size}">Size</span>
+          </div>
+          <input type="number" th:value="${item.quantity}" min="1">
+          <button type="button" class="remove-item">X</button>
+        </div>
+        <div class="item-price" th:text="${item.totalPrice}">Item Total Price</div>
+      </div>
+    </div>
+
+    <aside class="order-summary">
+      <h2>Order Summary</h2>
+      <div>
+        <span>Subtotal</span>
+        <span th:text="${subtotal}">Subtotal Price</span>
+      </div>
+      <div>
+        <span>Shipping</span>
+        <span th:text="${shipping}">Shipping Price</span>
+      </div>
+      <div>
+        <span>Discount</span>
+        <span th:text="${discount}">Discount Price</span>
+      </div>
+      <div class="total">
+        <span>Total</span>
+        <span th:text="${total}">Total Price</span>
+      </div>
+      <button type="button" class="checkout-button">Checkout</button>
+    </aside>
+  </main>
 </div>
-
-<div class="rounded-box">
-  <img src="/image/bag1.png" width="200" height="200" alt="Heart Cross bag(4 Colors)">
-  <p class="rounded-box-title"><b>Heart Cross bag (4 Colors)</b></p>
-  <p class="rounded-box-price"><b>128,000</b></p>
-</div>
-
-<div class="order-summary">
-  <p class="rounded-box-title"><b>Order Summary</b></p>
-  <p class="rounded-box-price"><b>128,000</b></p>
-</div>
-
 </body>
 </html>

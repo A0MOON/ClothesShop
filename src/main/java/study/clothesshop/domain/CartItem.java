@@ -41,4 +41,9 @@ public class CartItem {
             throw new IllegalArgumentException("Cannot add different items to the same cart item.");
         }
     }
+
+    public int getTotalPrice() {
+        return this.item.getPrice() * this.quantity;
+    }
 }
+

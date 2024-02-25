@@ -3,10 +3,7 @@ package study.clothesshop.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import study.clothesshop.domain.Item;
 import study.clothesshop.dto.ItemDTO;
 import study.clothesshop.service.ItemService;
@@ -112,4 +109,6 @@ public class ItemController {
         model.addAttribute("itemid", itemid);
         return "items/product_details"; // 상품 상세 정보 페이지로 이동
     }
+
+
 }

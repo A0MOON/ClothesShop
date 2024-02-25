@@ -30,5 +30,10 @@ public class ItemService {
         return itemRepository.findAll();
     }
 
+    public Item findItemById(Long id) {
+        return itemRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Item not found with id: " + id));
+    }
+
 
 }
