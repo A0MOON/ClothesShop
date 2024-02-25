@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>주문 작성</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <link rel="stylesheet" href="/css/order_form.css">
+  <div th:replace="fragments/bodyHeader :: bodyHeader"></div>
+  <div th:replace="fragments/header :: header"></div>
+</head>
+<body>
+<div class="order-form-container">
+  <h2>주문 작성</h2>
+  <form action="/users/{userid}/item/{itemid}/order/confirm" method="post">
+    <div class="selected-product">
+      <h3>선택한 상품</h3>
+      <p>상품명: Heart Cross bag (4 Colors)</p>
+      <p>가격: 128,000원</p>
+    </div>
+    <div class="order-details">
+      <label for="quantity">수량:</label>
+      <input type="number" id="quantity" name="quantity" min="1" required>
+      <label for="option">옵션:</label>
+      <select id="option" name="option" required>
+        <option value="option1">Option 1</option>
+        <option value="option2">Option 2</option>
+        <option value="option3">Option 3</option>
+      </select>
+      <label for="address">배송 주소:</label>
+      <textarea id="address" name="address" required></textarea>
+    </div>
+    <button type="submit">주문 확인</button>
+  </form>
+</div>
+</body>
+</html>

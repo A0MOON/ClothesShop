@@ -24,7 +24,7 @@
                 <input type="email" name="email" class="form-input" placeholder="이메일을 입력하세요" required>
             </div>
             <div th:if="${error}" class="error-message">
-                회원 정보가 없습니다.
+                <p th:text="${error}"></p>
             </div>
             <button type="submit" class="form-button">확인</button>
         </form>

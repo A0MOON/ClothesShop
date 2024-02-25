@@ -76,17 +76,16 @@ public class MemberController {
     public String idFinder(@ModelAttribute("idFinderForm") IdFinderForm idFinderForm, Model model) {
         String name = idFinderForm.getName();
         String email = idFinderForm.getEmail();
-        String findLoginId = memberService.findLoginIdByNameAndEmail(name, email);
-
-        if (findLoginId != null) {
-            model.addAttribute("loginId", findLoginId);
+        try {
+            String loginId = memberService.findLoginIdByNameAndEmail(name, email);
+            model.addAttribute("loginId", loginId);
             return "users/id/id";
-        } else {
-
-            model.addAttribute("error", true);
+        } catch (IllegalArgumentException e) {
+            model.addAttribute("error", "해당하는 회원이 없습니다.");
             return "users/id/search";
         }
     }
+
 
     // 비밀번호 변경을 위한 회원 찾기
 

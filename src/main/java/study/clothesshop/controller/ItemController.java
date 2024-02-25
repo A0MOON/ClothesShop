@@ -104,4 +104,12 @@ public class ItemController {
         model.addAttribute("itemDTO", new ItemDTO());
         return "items/accessory"; // html
     }
+
+    @GetMapping("/users/{userid}/item/{itemid}")
+    public String showProductDetails(@PathVariable String userid, @PathVariable String itemid, Model model) {
+        // 여기서는 간단히 상품 정보를 모델에 추가합니다. 실제로는 상품 정보를 DB에서 가져와야 합니다.
+        model.addAttribute("userid", userid);
+        model.addAttribute("itemid", itemid);
+        return "product_details"; // 상품 상세 정보 페이지로 이동
+    }
 }

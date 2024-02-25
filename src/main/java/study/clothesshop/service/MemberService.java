@@ -46,11 +46,16 @@ public class MemberService {
 
 
     // 아이디 조회
+    // 아이디 조회
     @Transactional(readOnly = true)
     public String findLoginIdByNameAndEmail(String name, String email) {
         Optional<Member> loginIdByNameAndEmail = memberRepository.findLoginIdByNameAndEmail(name, email);
-        Member member = loginIdByNameAndEmail.get();
-        return member.getLoginId();
+        if (loginIdByNameAndEmail.isPresent()) {
+            Member member = loginIdByNameAndEmail.get();
+            return member.getLoginId();
+        } else {
+            throw new IllegalArgumentException("해당하는 회원이 없습니다."); // 값을 찾지 못한 경우 예외 처리
+        }
     }
 
     // 로그인
