@@ -131,7 +131,7 @@ public class MemberController {
                                  @RequestParam("confirmPassword") String confirmPassword,
                                  Model model) {
         if (!newPassword.equals(confirmPassword)) {
-            model.addAttribute("error", true);
+            model.addAttribute("error", "새 비밀번호가 일치하지 않습니다.");
             return "/users/password/newpassword";
         }
 
