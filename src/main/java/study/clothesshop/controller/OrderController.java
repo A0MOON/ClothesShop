@@ -4,9 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import study.clothesshop.domain.Item;
 import study.clothesshop.loginweb.OrderForm;
-import study.clothesshop.service.ItemService;
 
 @Controller
 @RequiredArgsConstructor
@@ -17,7 +15,7 @@ public class OrderController {
         // 여기서는 간단히 주문 폼을 보여주기 위해 사용자 ID와 상품 ID를 모델에 추가합니다.
         model.addAttribute("userid", userid);
         model.addAttribute("itemid", itemid);
-        return "order_form"; // 주문 작성 페이지로 이동
+        return "order/order_form"; // 주문 작성 페이지로 이동
     }
 
     @PostMapping("/users/{userid}/item/{itemid}/order/confirm")

@@ -110,6 +110,6 @@ public class ItemController {
         // 여기서는 간단히 상품 정보를 모델에 추가합니다. 실제로는 상품 정보를 DB에서 가져와야 합니다.
         model.addAttribute("userid", userid);
         model.addAttribute("itemid", itemid);
-        return "product_details"; // 상품 상세 정보 페이지로 이동
+        return "items/product_details"; // 상품 상세 정보 페이지로 이동
     }
 }

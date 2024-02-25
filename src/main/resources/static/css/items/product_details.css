@@ -1,0 +1,62 @@
+.option {
+    position: absolute;
+    right: 260px;
+    top: 40%; /* 화면 세로 중앙에 위치하도록 설정 */
+    transform: translateY(-50%);
+}
+
+.product-image{
+    position: absolute;
+    left: 260px;
+    top: 40%; /* 화면 세로 중앙에 위치하도록 설정 */
+    transform: translateY(-50%);
+}
+
+select{
+    width: 250px;
+    height: 30px;
+
+}
+
+.orderbutton{
+    width: 230px; /*버튼 길이*/
+    padding: 10px;
+    background-color: #f1f1f1;
+    color: black;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    font-weight: normal;
+    margin: 30px 0px;  /*버튼 위치*/
+    text-align: center;
+}
+
+.orderbutton a{
+    color: black;
+    text-decoration: none;
+}
+
+.cartbutton{
+    width: 230px; /*버튼 길이*/
+    padding: 10px;
+    background-color: #ffffff;
+    color: black;
+    border-radius: 15px;
+    cursor: pointer;
+    font-weight: normal;
+    margin: 30px 0px;  /*버튼 위치*/
+    border: 3px solid #f1f1f1;
+    text-align: center;
+}
+
+.cartbutton a{
+    color: black;
+    text-decoration: none;
+}
+
+.detailimage{
+    position: absolute;
+    right: 350px;
+    top: 150%;
+
+}
