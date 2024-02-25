@@ -30,6 +30,11 @@ public class OrderController {
         return "redirect:/"; // 홈 페이지로 리다이렉트
     }
 
+    @GetMapping("/items/product_details_green")
+    public String product(Model model){
+        return "items/product_details/green";
+    }
+
 
 }
 

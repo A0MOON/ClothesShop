@@ -44,8 +44,6 @@ public class MemberService {
         return memberRepository.findAll();
     }
 
-
-    // 아이디 조회
     // 아이디 조회
     @Transactional(readOnly = true)
     public String findLoginIdByNameAndEmail(String name, String email) {
@@ -68,7 +66,6 @@ public class MemberService {
         return false;
 
     }
-
 
     // 비밀번호 변경을 위한 회원 정보 찾기
     public Member findPasswordByLoginIdAndNameAndEmail(String loginId, String name, String email) {
@@ -97,6 +94,5 @@ public class MemberService {
                 .orElseThrow(() -> new IllegalArgumentException("Invalid member id"));
         member.setPhone(newPhoneNumber);
     }
-
 
 }

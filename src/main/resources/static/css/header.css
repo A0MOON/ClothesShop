@@ -33,7 +33,7 @@ body {
     display: none;
     position: absolute; /* 하위 메뉴를 absolute로 설정하여 부모 요소에 상대적으로 위치시킴 */
     top: 100%; /* 부모 요소 아래에 위치 */
-    left: -5px; /* 부모 요소 왼쪽에 위치 */
+    left: -22px; /* 부모 요소 왼쪽에 위치 */
     padding: 10px; /* 내부 여백 추가 (선택사항) */
 
 }
@@ -44,7 +44,7 @@ body {
     display: none;
     position: absolute; /* 하위 메뉴를 absolute로 설정하여 부모 요소에 상대적으로 위치시킴 */
     top: 100%; /* 부모 요소 아래에 위치 */
-    left: 90px; /* 부모 요소 왼쪽에 위치 */
+    left: 130px; /* 부모 요소 왼쪽에 위치 */
     padding: 10px; /* 내부 여백 추가 (선택사항) */
 }
 
@@ -100,6 +100,11 @@ body {
 
 .form-input-group {
     margin-bottom: 20px;
+}
+
+.form-input-group2 {
+    margin-bottom: 20px;
+    margin-left: 30px;
 }
 
 .form-input {

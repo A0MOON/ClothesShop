@@ -20,25 +20,30 @@
   </div>
 
   <div class="order-section">
-    <form action="/users/{userid}/item/{itemid}/order" method="post">
+    <form th:action="@{/cart/add}" method="post">
+      <input type="hidden" name="userId" th:value="${userId}" />
+      <input type="hidden" name="itemId" th:value="${itemId}" />
       <div class="options">
-        <p><b>Color</b></p>
+        <p><b>Color:</b></p>
         <select id="color" name="color" required>
           <option value="Red">Red</option>
-          <option value="blue">blue</option>
-          <option value="black">black</option>
-          <option value="purple">purple</option>
+          <option value="Blue">Blue</option>
+          <option value="Black">Black</option>
+          <option value="Purple">Purple</option>
         </select>
-
       </div>
+
       <div class="orderbutton">
         <a th:href="@{/users/{userid}/item/{itemid}/order(userid=${userid}, itemid=${itemid})}" class="btn btn-primary">구매하기</a> <!-- 주문하기 버튼 추가 -->
       </div>
 
       <div class="cartbutton">
-        <a th:href="@{/users/{userid}/item/{itemid}/order(userid=${userid}, itemid=${itemid})}" class="btn btn-primary">장바구니에 추가</a> <!-- 장바구니 추가 -->
+        <a th:href="@{/users/cart}" class="btn btn-primary">장바구니에 추가</a> <!-- 장바구니 추가 -->
       </div>
-     </form>
+<!--    <input type="hidden" name="quantity" value="1"/>
+    <button type="submit" class="btn btn-primary">장바구니에 추가</button>-->
+    </form>
+
 
     <div class="detailimage">
       <img src="/image/detailshot.jpeg" width="500" height="700" alt="Heart Cross bag(4 Colors) Detail Cut">

@@ -16,7 +16,7 @@
                 <h3>아이디</h3>
                 <input type="text" name="loginId" class="form-input" placeholder="아이디를 입력하세요" required>
             </div>
-            <div class="form-input-group">
+            <div class="form-input-group2">
                 <h3>비밀번호</h3>
                 <input type="password" name="password" class="form-input" placeholder="비밀번호를 입력하세요" required>
             </div>
@@ -26,14 +26,13 @@
             <button type="submit" class="form-button">로그인</button>
         </form>
 
-
-        <a href="/users/id/search" class="form-link">아이디 찾기</a>
-        <a href="/users/password/search" class="form-link">비밀번호 찾기</a>
+        <div class="detailsek">
+            <a href="/users/id/search" class="form-link">아이디 찾기</a> <a href="/users/password/search" class="form-link">비밀번호 찾기</a>
+        </div>
 
         <button onclick="location.href='/users/signup'" class="form-button2">회원가입</button>
     </div>
 
-    <div th:replace="fragments/footer :: footer"/>
 </div>
 </body>
 </html>

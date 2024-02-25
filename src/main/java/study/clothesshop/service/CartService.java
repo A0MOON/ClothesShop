@@ -22,8 +22,6 @@ public class CartService {
     private final CartItemRepository cartItemRepository;
     private final ItemRepository itemRepository;
 
-
-
     @Transactional
     public void addItemToCart(Long cartId, Item item, int quantity) {
         Cart cart = cartRepository.findById(cartId).orElseThrow(() -> new IllegalArgumentException("Cart not found"));
